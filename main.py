@@ -12,6 +12,8 @@ if __name__ == '__main__':
     username = os.environ['username']
     password = os.environ['password']
     address = os.environ['address']
+    pixiv_name = os.environ['pixiv_username']
+    pixiv_pass = os.environ['pixiv_password']
     db = database.Database(database_name, username, address, password)
     idd = db.max_id()
     print('There are %s images in the database, updating.\n' % (idd + 1))
