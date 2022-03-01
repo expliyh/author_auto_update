@@ -12,5 +12,8 @@ if __name__ == '__main__':
     username = os.environ['username']
     password = os.environ['password']
     address = os.environ['address']
+    db = database.Database(database_name, username, address, password)
+    idd = db.max_id()
+    print(idd)
 
 # 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
