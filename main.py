@@ -14,6 +14,10 @@ if __name__ == '__main__':
     address = os.environ['address']
     db = database.Database(database_name, username, address, password)
     idd = db.max_id()
-    print(idd)
+    print('There are ')
+    print(idd + 1)
+    print(' images in the database, updating.\n')
+    for i in range(idd + 1):
+        pixiv_id = db.get_image_id(i)
 
 # 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
