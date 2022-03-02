@@ -14,10 +14,12 @@ if __name__ == '__main__':
     address = os.environ['address']
     pixiv_name = os.environ['pixiv_username']
     pixiv_pass = os.environ['pixiv_password']
+    refresh = os.environ['pixiv_refresh']
     db = database.Database(database_name, username, address, password)
     idd = db.max_id()
     pixiv_client = pixivapi.Client()
     # pixiv_client.login(pixiv_name, pixiv_pass)
+    pixiv_client.authenticate(refresh)
     print('There are %s images in the database, updating.\n' % (idd + 1))
     for i in range(idd + 1):
         pixiv_id = db.get_image_id(i)

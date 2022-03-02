@@ -42,4 +42,5 @@ jobs:
         address: ${{ secrets.ADDRESS }}
         pixiv_username: ${{ secrets.PIXIVUSERNAME }}
         pixiv_password: ${{ secrets.PIXIVPASSWORD }}
+        pixiv_refresh: ${{ secrets.REFRESHTOKEN }}
       run: python main.py
