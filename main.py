@@ -6,6 +6,7 @@ import pixivapi
 import os
 import database
 import requests
+import json
 
 # 按间距中的绿色按钮以运行脚本。
 if __name__ == '__main__':
@@ -30,6 +31,13 @@ if __name__ == '__main__':
         # author_name = author.name
         params = {'id': pixiv_id}
         information = requests.get(url='https://api.moedog.org/pixiv/v2/', params=params)
-        print(information.text)
+        json_info = json.loads(information.text)
+        img_name = json_info.illust.title
+        author_name = json_info.illust.user.name
+        author_id = json_info.illust.user.id
+        print("Updating image %s name:%s author:%s author_id:%s" % (i, img_name, author_name, author_id))
+        db.update_author(i, author_name, author_id)
+        break
+        # print(information.text)
 
 # 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
