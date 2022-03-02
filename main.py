@@ -17,7 +17,7 @@ if __name__ == '__main__':
     db = database.Database(database_name, username, address, password)
     idd = db.max_id()
     pixiv_client = pixivapi.Client()
-    pixiv_client.login(pixiv_name, pixiv_pass)
+    # pixiv_client.login(pixiv_name, pixiv_pass)
     print('There are %s images in the database, updating.\n' % (idd + 1))
     for i in range(idd + 1):
         pixiv_id = db.get_image_id(i)
