@@ -32,10 +32,10 @@ if __name__ == '__main__':
         params = {'id': pixiv_id}
         information = requests.get(url='https://api.moedog.org/pixiv/v2/', params=params)
         json_info = json.loads(information.text)
-        print(json_info)
-        img_name = json_info.illust.title
-        author_name = json_info.illust.user.name
-        author_id = json_info.illust.user.id
+        # print(json_info)
+        img_name = json_info['illust']['title']
+        author_name = json_info['illust']['user']['name']
+        author_id = json_info['illust']['user']['id']
         print("Updating image %s name:%s author:%s author_id:%s" % (i, img_name, author_name, author_id))
         db.update_author(i, author_name, author_id)
         break
