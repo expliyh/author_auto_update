@@ -38,7 +38,7 @@ if __name__ == '__main__':
         author_id = json_info['illust']['user']['id']
         print("Updating image %s name:%s author:%s author_id:%s" % (i, img_name, author_name, author_id))
         db.update_author(i, author_name, author_id)
-        break
         # print(information.text)
+    print('Update finished!')
 
 # 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
