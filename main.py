@@ -5,6 +5,7 @@
 import pixivapi
 import os
 import database
+import requests
 
 # 按间距中的绿色按钮以运行脚本。
 if __name__ == '__main__':
@@ -19,13 +20,16 @@ if __name__ == '__main__':
     idd = db.max_id()
     pixiv_client = pixivapi.Client()
     # pixiv_client.login(pixiv_name, pixiv_pass)
-    pixiv_client.authenticate(refresh)
+    # pixiv_client.authenticate(refresh)
     print('There are %s images in the database, updating.\n' % (idd + 1))
     for i in range(idd + 1):
         pixiv_id = db.get_image_id(i)
-        illustration = pixiv_client.fetch_illustration(pixiv_id)
-        author = illustration.user
-        author_id = author.id
-        author_name = author.name
+        # illustration = pixiv_client.fetch_illustration(pixiv_id)
+        # author = illustration.user
+        # author_id = author.id
+        # author_name = author.name
+        params = {'id': pixiv_id}
+        information = requests.get(url='https://api.moedog.org/pixiv/v2/', params=params)
+        print(information.text)
 
 # 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
