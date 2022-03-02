@@ -16,8 +16,14 @@ if __name__ == '__main__':
     pixiv_pass = os.environ['pixiv_password']
     db = database.Database(database_name, username, address, password)
     idd = db.max_id()
+    pixiv_client = pixivapi.Client()
+    pixiv_client.login(pixiv_name, pixiv_pass)
     print('There are %s images in the database, updating.\n' % (idd + 1))
     for i in range(idd + 1):
         pixiv_id = db.get_image_id(i)
+        illustration = pixiv_client.fetch_illustration(pixiv_id)
+        author = illustration.user
+        author_id = author.id
+        author_name = author.name
 
 # 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
