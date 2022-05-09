@@ -6,8 +6,19 @@ class Database:
         self.db = pymysql.connect(host=address, user=username, password=password, database=basename)
         return
 
+    def is_connected(self):
+         """Check if the server is alive"""
+        try:
+            self.conn.ping(reconnect=True)
+            # print"db is connecting"
+        except:
+            # traceback.print_exc()
+            self.conn = self.to_connect()
+            print("db reconnect")
+
     def max_id(self):
         sql = "SELECT MAX(id) FROM `imginfo` WHERE 1"
+        self.is_connected()
         cursor = self.db.cursor()
         try:
             cursor.execute(sql)
@@ -21,6 +32,7 @@ class Database:
 
     def get_image_id(self, idd):
         sql = "SELECT * FROM `imginfo` WHERE `id` = '%s'" % idd
+        self.is_connected()
         cursor = self.db.cursor()
         try:
             cursor.execute(sql)
@@ -35,6 +47,7 @@ class Database:
     def update_author(self, idd, author: str, author_id):
         cursor = self.db.cursor()
         sql = "UPDATE `imginfo` SET `author`='%s',`author_id`='%s' WHERE `id`='%s'" % (author, author_id, idd)
+        self.is_connected()
         try:
             # 执行sql语句
             cursor.execute(sql)
