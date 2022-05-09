@@ -19,6 +19,8 @@ if __name__ == '__main__':
     refresh = os.environ['pixiv_refresh']
     db = database.Database(database_name, username, address, password)
     idd = db.max_id()
+    if idd == 'Error':
+        print('Failed to get max id')
     pixiv_client = pixivapi.Client()
     # pixiv_client.login(pixiv_name, pixiv_pass)
     # pixiv_client.authenticate(refresh)
