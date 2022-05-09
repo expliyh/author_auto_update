@@ -15,7 +15,7 @@ class Database:
 
     def is_connected(self):
         try:
-            self.conn.ping(reconnect=True)
+            self.db.ping(reconnect=True)
             # print"db is connecting"
         except:
             # traceback.print_exc()
