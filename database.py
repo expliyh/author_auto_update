@@ -3,17 +3,23 @@ import pymysql
 
 class Database:
     def __init__(self, basename, username, address, password):
+        self.basename = basename
+        self.username = username
+        self.address = address
+        self.password = password
         self.db = pymysql.connect(host=address, user=username, password=password, database=basename)
         return
 
+    def connect(self):
+        return pymysql.connect(host=self.address, user=self.username, password=self.password, database=self.basename)
+
     def is_connected(self):
-         """Check if the server is alive"""
         try:
             self.conn.ping(reconnect=True)
             # print"db is connecting"
         except:
             # traceback.print_exc()
-            self.conn = self.to_connect()
+            self.db = self.to_connect()
             print("db reconnect")
 
     def max_id(self):
