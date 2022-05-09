@@ -31,6 +31,8 @@ if __name__ == '__main__':
         # author = illustration.user
         # author_id = author.id
         # author_name = author.name
+        print(pixiv_id)
+        print('\n')
         params = {'id': pixiv_id}
         information = requests.get(url='https://api.moedog.org/pixiv/v2/', params=params)
         json_info = json.loads(information.text)
