@@ -45,7 +45,7 @@ class Database:
             results = cursor.fetchall()
             img_id = -1
             for row in results:
-                img_id = row[5]
+                img_id = row[0]
             return img_id
         except pymysql.Error:
             return 'Error'
