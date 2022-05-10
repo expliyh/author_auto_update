@@ -8,7 +8,37 @@ import database
 import requests
 import json
 
+
 # 按间距中的绿色按钮以运行脚本。
+
+
+def update(self, databasel, iddd):
+    pixiv_idl = db.get_image_id(iddd)
+    print('\n')
+    params = {'id': pixiv_idl}
+    information = requests.get(url='https://api.moedog.org/pixiv/v2/', params=params)
+    json_info = json.loads(information.text)
+    print(json_info)
+    print('\n')
+    img_name = json_info['illust']['title']
+    author_name = json_info['illust']['user']['name']
+    author_id = json_info['illust']['user']['id']
+    tags = json['illust']['tags']
+    caption = json['illust']['caption']
+    try:
+        original_url = json['meta_single_page']['original_image_url']
+    except:
+        original_url = 'Empty'
+
+    tagstxt = json.dumps(tags)
+    print("Updating image %s name:%s author:%s author_id:%s" % (i, img_name, author_name, author_id))
+    print("Tags: %s" % tagstxt)
+    print("Captions: %s" % caption)
+    databasel.update_all(iddd, img_name, author_name, pixiv_idl, author_id, tags, caption, original_url,
+                         information.text)
+    # print(information.text)
+
+
 if __name__ == '__main__':
     database_name = os.environ['database']
     username = os.environ['username']
@@ -25,24 +55,15 @@ if __name__ == '__main__':
     # pixiv_client.login(pixiv_name, pixiv_pass)
     # pixiv_client.authenticate(refresh)
     print('There are %s images in the database, updating.\n' % (idd + 1))
+    i = 0
+    update(db, i)
     for i in range(idd + 1):
         pixiv_id = db.get_image_id(i)
         # illustration = pixiv_client.fetch_illustration(pixiv_id)
         # author = illustration.user
         # author_id = author.id
         # author_name = author.name
-        print(pixiv_id)
-        print('\n')
-        params = {'id': pixiv_id}
-        information = requests.get(url='https://api.moedog.org/pixiv/v2/', params=params)
-        json_info = json.loads(information.text)
-        print(json_info)
-        print('\n')
-        img_name = json_info['illust']['title']
-        author_name = json_info['illust']['user']['name']
-        author_id = json_info['illust']['user']['id']
-        print("Updating image %s name:%s author:%s author_id:%s" % (i, img_name, author_name, author_id))
-        db.update_author(i, author_name, author_id)
+
         # print(information.text)
     print('Update finished!')
 
