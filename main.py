@@ -65,10 +65,12 @@ if __name__ == '__main__':
         username = os.environ['database']
     password = os.environ['password']
     address = os.environ['address']
+    print("Env finished!")
     # pixiv_name = os.environ['pixiv_username']
     # pixiv_pass = os.environ['pixiv_password']
     # refresh = os.environ['pixiv_refresh']
     db = database.Database(database_name, username, address, password)
+    print("Db connected!")
     idd = db.max_id()
     if idd == 'Error':
         print('Failed to get max id')
@@ -76,7 +78,6 @@ if __name__ == '__main__':
     # pixiv_client.login(pixiv_name, pixiv_pass)
     # pixiv_client.authenticate(refresh)
     print('There are %s images in the database, updating.\n' % (idd + 1))
-    i = 0
 
     for i in range(idd + 1):
         update(db, i)
