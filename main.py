@@ -14,7 +14,7 @@ print("Inits")
 
 
 def update(databasel, iddd):
-    pixiv_idl = db.get_image_id(iddd)
+    pixiv_idl = databasel.get_image_id(iddd)
     print('\n')
     params = {'id': pixiv_idl}
     information = requests.get(url='https://api.moedog.org/pixiv/v2/', params=params)
