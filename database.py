@@ -67,7 +67,10 @@ class Database:
 
     def update_all(self, idd, title: str, author: str, pixiv_id, author_id, tags: str, caption: str, original_url: str, reply: str):
         cursor = self.db.cursor()
-        sql = "UPDATE `imginfo` SET `name`='%s',`author`='%s',`pixivid`='%s',`author_id`='%s',`tags`='%s',`caption`='%s',`original_url`='%s',`reply`='%s' WHERE `id`='%s'" % (title, author, pixiv_id, author_id, tags, caption, original_url, reply, idd)
+        sql = "UPDATE `imginfo` SET `name`='%s',`author`='%s',`pixivid`='%s',`author_id`='%s',`tags`='%s'," \
+              "`caption`='%s',`original_url`='%s',`reply`='%s' WHERE `id`='%s'" % (title, author, pixiv_id,
+                                                                                   author_id, tags, caption,
+                                                                                   original_url, reply, idd)
         # print(sql)
         self.is_connected()
         try:
