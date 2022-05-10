@@ -59,6 +59,7 @@ if __name__ == '__main__':
     # username = os.environ['username']
     # password = os.environ['password']
     # address = os.environ['address']
+    print("Program started!")
     database_name = os.environ['database']
     username = os.environ['username']
     if username == 'expli':
