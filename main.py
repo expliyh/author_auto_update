@@ -12,7 +12,7 @@ import json
 # 按间距中的绿色按钮以运行脚本。
 
 
-def update(self, databasel, iddd):
+def update(databasel, iddd):
     pixiv_idl = db.get_image_id(iddd)
     print('\n')
     params = {'id': pixiv_idl}
