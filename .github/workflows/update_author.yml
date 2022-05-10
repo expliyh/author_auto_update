@@ -43,4 +43,4 @@ jobs:
         pixiv_username: ${{ secrets.PIXIVUSERNAME }}
         pixiv_password: ${{ secrets.PIXIVPASSWORD }}
         pixiv_refresh: ${{ secrets.REFRESHTOKEN }}
-      run: python main.py
+      run: python3 main.py
