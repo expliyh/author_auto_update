@@ -51,7 +51,7 @@ if __name__ == '__main__':
     idd = db.max_id()
     if idd == 'Error':
         print('Failed to get max id')
-    pixiv_client = pixivapi.Client()
+    # pixiv_client = pixivapi.Client()
     # pixiv_client.login(pixiv_name, pixiv_pass)
     # pixiv_client.authenticate(refresh)
     print('There are %s images in the database, updating.\n' % (idd + 1))
