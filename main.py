@@ -23,10 +23,10 @@ def update(databasel, iddd):
     img_name = json_info['illust']['title']
     author_name = json_info['illust']['user']['name']
     author_id = json_info['illust']['user']['id']
-    tags = json['illust']['tags']
-    caption = json['illust']['caption']
+    tags = json_info['illust']['tags']
+    caption = json_info['illust']['caption']
     try:
-        original_url = json['meta_single_page']['original_image_url']
+        original_url = json_info['meta_single_page']['original_image_url']
     except:
         original_url = 'Empty'
 
