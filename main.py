@@ -8,6 +8,7 @@ import database
 import requests
 import json
 
+print("Inits")
 
 # 按间距中的绿色按钮以运行脚本。
 
