@@ -2,7 +2,7 @@
 
 # 按 Shift+F10 执行或将其替换为您的代码。
 # 按 双击 Shift 在所有地方搜索类、文件、工具窗口、操作和设置。
-import pixivapi
+# import pixivapi
 import os
 import database
 import requests
@@ -30,23 +30,44 @@ def update(databasel, iddd):
     except:
         original_url = 'Empty'
 
-    tagstxt = json.dumps(tags)
+    tagstxt = json.dumps(tags, ensure_ascii=False)
+    tags_converted = ''
+    for r in tagstxt:
+        if r == '\'':
+            tags_converted += '\\'
+        tags_converted += r
+    cap_converted = ''
+    for r in caption:
+        if r == '\'':
+            cap_converted += '\\'
+        cap_converted += r
+    rep_converted = ''
+    for r in information.text:
+        if r == '\'':
+            rep_converted += '\\'
+        rep_converted += r
     print("Updating image %s name:%s author:%s author_id:%s" % (i, img_name, author_name, author_id))
     print("Tags: %s" % tagstxt)
     print("Captions: %s" % caption)
-    databasel.update_all(iddd, img_name, author_name, pixiv_idl, author_id, tags, caption, original_url,
-                         information.text)
+    databasel.update_all(iddd, img_name, author_name, pixiv_idl, author_id, tags_converted, cap_converted, original_url,
+                         rep_converted)
     # print(information.text)
 
 
 if __name__ == '__main__':
+    # database_name = os.environ['database']
+    # username = os.environ['username']
+    # password = os.environ['password']
+    # address = os.environ['address']
     database_name = os.environ['database']
     username = os.environ['username']
+    if username == 'expli':
+        username = os.environ['database']
     password = os.environ['password']
     address = os.environ['address']
-    pixiv_name = os.environ['pixiv_username']
-    pixiv_pass = os.environ['pixiv_password']
-    refresh = os.environ['pixiv_refresh']
+    # pixiv_name = os.environ['pixiv_username']
+    # pixiv_pass = os.environ['pixiv_password']
+    # refresh = os.environ['pixiv_refresh']
     db = database.Database(database_name, username, address, password)
     idd = db.max_id()
     if idd == 'Error':
@@ -56,9 +77,10 @@ if __name__ == '__main__':
     # pixiv_client.authenticate(refresh)
     print('There are %s images in the database, updating.\n' % (idd + 1))
     i = 0
-    update(db, i)
+
     for i in range(idd + 1):
-        pixiv_id = db.get_image_id(i)
+        update(db, i)
+        # pixiv_id = db.get_image_id(i)
         # illustration = pixiv_client.fetch_illustration(pixiv_id)
         # author = illustration.user
         # author_id = author.id
