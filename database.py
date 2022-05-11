@@ -1,4 +1,5 @@
 import pymysql
+import requests
 
 
 class Database:
@@ -72,7 +73,7 @@ class Database:
         sql = "UPDATE `imginfo` SET `name`='%s',`author`='%s',`pixivid`='%s',`author_id`='%s',`tags`='%s'," \
               "`caption`='%s',`original_url`='%s' WHERE `id`='%s'" % (title, author, pixiv_id, author_id, tags, caption
                                                                       , original_url, idd)
-        sql1 = "UPDATE `imginfo` SET `reply`='%s' WHERE `id`='%s'" % (reply, idd)
+        # sql1 = "UPDATE `imginfo` SET `reply`='%s' WHERE `id`='%s'" % (reply, idd)
         # print(sql)
         self.is_connected()
         try:
@@ -85,15 +86,19 @@ class Database:
             print("Database operation failure")
             self.db.rollback()
         cursor.close()
-        cursor1 = self.db.cursor()
-        self.is_connected()
-        try:
-            # 执行sql语句
-            cursor1.execute(sql1)
-            # 提交到数据库执行
-            self.db.commit()
-        except pymysql.Error:
-            # 如果发生错误则回滚
-            print("Database operation failure")
-            self.db.rollback()
-        cursor1.close()
+        params = {'id': idd,
+                  'password': self.password,
+                  'reply': reply}
+        info = requests.post('https://image.mt6735.top/database.php', data=params)
+        # cursor1 = self.db.cursor()
+        # self.is_connected()
+        # try:
+        #    # 执行sql语句
+        #    cursor1.execute(sql1)
+        #    # 提交到数据库执行
+        #    self.db.commit()
+        # except pymysql.Error:
+        #    # 如果发生错误则回滚
+        #    print("Database operation failure")
+        #    self.db.rollback()
+        # cursor1.close()
